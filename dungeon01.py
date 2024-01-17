@@ -35,7 +35,7 @@ print('')
 time.sleep(1) 
 
 # === [kamer 3] === #
-item = random.choice(["shild", "Zwaard"])
+item = random.choice(["schild", "Zwaard"])
 
 print('Je duwt hem open en stap een hele lange kamer binnen.')
 if item == "schild":
