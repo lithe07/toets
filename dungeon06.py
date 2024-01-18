@@ -5,6 +5,7 @@ player_attack = 1
 player_defense = 0
 player_health = 3
 rupee = 0
+sleutel = False
 
 # === [kamer 1] === #
 print('Door de twee grote deuren loop je een gang binnen.')
@@ -14,12 +15,11 @@ print('')
 time.sleep(1)
 
 # === [kamer 7] === #
-rupee =+ 1
+rupee += 1
 print(f"Je krijgt nu {rupee} rupee zodat je straks je eigen wapens kan kopen.")
 
 route_keizen = input('Wil naar (rechts/rechtdoor): ')
 if route_keizen == 'rechtdoor':
-
 # === [kamer 2] === #
     schatkist = 'sleutel'
     eerste_getal = random.randint(10, 25)
@@ -32,13 +32,13 @@ if route_keizen == 'rechtdoor':
     antwoord = int(input('Wat toest je in? '))
 
     if antwoord == juiste_antwoord:
+        sleutel = True
         print("Juist je hebt goed gerekent")
         print(f"Hier bij krijg je de {schatkist} van de schatkist")
     else:
         print("helaas dat is niet de juiste antwoord")
     print('Je zie een deur achter het standbeeld.')
-
-    kamers_keuze = input("Je mag tussen twee kamers gaan keizen antwoord met kamer (3/6)? ")
+    kamers_keuze = input("Je mag tussen twee kamers gaan keizen antwoord met kamer (8/6)? ")
     if kamers_keuze == '6':
         # === [kamer 6] === # 
         zombie_attack = 1
@@ -60,25 +60,55 @@ if route_keizen == 'rechtdoor':
                 print(f'Je health is nu {player_health}.')
             else:
                 print('Helaas is de zombie te sterk voor je.')
-print('')
-time.sleep(1)
+                print('')
+                time.sleep(1)
 
-# === [kamer 3] === #
-
-print('Je duwt hem open en stap een hele lange kamer binnen.')
-wapens_keuze = input("Je kan nu je eigen wapen keizen antwoord met (schild/zwaard) anders zeg (niks): ")
-if wapens_keuze == "schild":
-    player_defense += 1
-    rupee -= 1
-    print(f"Je hebt een Schild gekocht! en je hebt {rupee} rupee over")
-elif wapens_keuze == "zwaard":
-    player_attack += 2
-    rupee -= 1
-    print(f"Je hebt een Zwaard gekocht! en je hebt {rupee} rupee over")
+# === [kamer 8] === # 
+eerste_dubbel_steen = random.randint(1,7)
+tweede_dubbel_steen = random.randint(1,7)
+uitkomst = eerste_dubbel_steen + tweede_dubbel_steen
+gokmachine = input("Er is een gokmachine wil je het gebruiken (ja/nee)? ")
+if gokmachine == 'ja':
+    print(uitkomst)
+    if uitkomst > 7:
+        rupee += 1
+        print(f" JE hebt een rupee gewonnen, je huidege saldo is {rupee}")
+    elif uitkomst < 7:
+        player_health -= 1
+        print(f"Helaas je hebt een Health verloren, je huidege health is {player_health}")
+        if player_health == 0:
+            print("Game over")
+            exit()
+    elif uitkomst == 7:
+        rupee += 1 
+        player_health -= 1
+        print(f"Je Hebt toch een rupee gewonnen {rupee} maar toch heb je een health verloren {player_health}")                  
 else:
-    print("Je hebt niks gekocht dat is gevaarlijke voor je tweede vechtpartij")
-
-print('Op naar de volgende deur.')
+    print("JE mag door naar kamer3 ")
+  
+# === [kamer 3] === #
+print('Je duwt hem open en stap een hele lange kamer binnen.')
+print(f'Je huidege saldo is {rupee} rupee')
+if rupee >= 2:
+    wapens_keuze = input("Je kan nu je eigen wapen keizen antwoord met (schild en zwaard) of (niks): ")
+    if wapens_keuze  == "schild en zwaard":
+        player_defense += 1
+        player_attack += 2
+        rupee -= 2
+        print(f"Je hebt twee wapens gekocht. en je huidige slado is {rupee}")
+elif rupee == 1:
+    wapens_keuze = input("JE mag een wapen keizen schild/zwaard of niks : ")
+    if wapens_keuze == 'schild':
+        player_defense += 1
+        rupee -= 1
+        print(f"Je hebt een schild gekocht. en je huidige saldo {rupee}")
+    elif wapens_keuze ==  'zwaard':
+        player_attack += 2
+        rupee -= 1
+        print(f"Je hebt een zwaard gekocht. en je huidige saldo {rupee}")
+    else:
+        print("JE hebt niks gekocht.")
+print('Op naar de volgende deur.')  
 print('')
 time.sleep(1)
 
@@ -113,7 +143,7 @@ print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
 print('Tot je verbazig zie je een schatkist in het midden van de kamer staan.')
 print('Je loopt er naartoe.')
 
-if antwoord == juiste_antwoord:
+if sleutel:
     print("Je kan de schatkist open maken je hebt gewonnen")
 else:
     print("Je kan de schatkist niet open maken. je verliest")
