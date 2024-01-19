@@ -8,6 +8,7 @@ player_health = 3
 rupee = 0
 sleutel = False
 schatkist = 'sleutel'
+boom = False
  
 kamer9 = False
  
@@ -126,8 +127,9 @@ if kamer7_keuze == 8 or kamer2_keuze == 8 or kamer6_keuze == 8:
  
 # === [kamer 3] === #
 print("Welkom in kamer3 ")
+print(f"Je huidige saldo is {rupee} rupee")
 print('Je duwt hem open en stap een hele lange kamer binnen.')
-print('items zijn (schild) (zwaard) (sleutel)')
+print('items zijn (schild) (boom) (sleutel)')
 if rupee >= 3:
     print('je kan nu alle items kopen type (alles) als je alles wilt kopen')
 elif rupee == 2:
@@ -137,19 +139,19 @@ elif rupee == 1:
 wapen_kopen = input('wat wil je kopen? ')
 if wapen_kopen == 'alles':
     player_defense += 1
-    player_attack += 2
+    boom = True
     sleutel = True
-elif wapen_kopen == 'schild en zwaard':
+elif wapen_kopen == 'schild en boom':
     player_defense += 1
-    player_attack += 2
-elif wapen_kopen == 'zwaard en sleutel':
-    player_attack += 2
+    boom = True
+elif wapen_kopen == 'boom en sleutel':
+    boom = True 
     sleutel = True
 elif wapen_kopen == 'schild en sleutel':
     player_defense += 1
     sleutel = True
-elif wapen_kopen == 'zwaard':
-    player_attack += 2
+elif wapen_kopen == 'boom':
+    boom = True 
 elif wapen_kopen == 'schild':
     player_defense += 1
 else:
@@ -186,6 +188,16 @@ else:
         if player_attack_amount < zombie_attack_amount:
             print(f'In {player_attack_amount} rondes versla je de zombie.')
             print(f'Je health is nu {player_health}.')
+            print("Hier ligt het zwaard en deze is dus alleen te bereiken met de bom.")
+            zwaard = input("Wil je de zwaard halen (ja/nee)? ")
+            # === [kamer 13] === #
+            print("# === [kamer 13] === #")
+            if zwaard == 'ja':
+                boom  = False
+                player_attack += 2
+                print("Je hebt een zwaard gekregen")
+            else:
+                print("Je kan door naar andere kamers")
         else:
             print('Helaas is de zombie te sterk voor je.')
             print('Game over.')
@@ -194,7 +206,7 @@ else:
         print('')
         time.sleep(1)
 
-    kamer4_keuze= int(input("Naar welke kamer wil je heen gaan? 12/10 "))
+    kamer4_keuze= int(input("Naar welke kamer wil je heen gaan 12/10? "))
     if kamer4_keuze == 12:
         # === [kamer 12] === #
         print(" === [kamer 12] === ")
@@ -235,7 +247,7 @@ print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
 print('Tot je verbazing zie je een schatkist in het midden van de kamer staan.')
 print('Je loopt er naartoe.')
  
-if sleutel:
+if sleutel or boom :
     print("Je kan de schatkist open maken, je hebt gewonnen")
 else:
     print("Je kan de schatkist niet open maken. Je verliest.")
