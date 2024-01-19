@@ -47,7 +47,7 @@ if kamer7_keuze == 2:
         rupee += 1
         print("Juist je hebt goed gerekend")
         print(f"Hier bij krijg je {rupee} rupee.")
-    else:
+    else:  
         print("helaas dat is niet de juiste antwoord")
     print('Je zie een deur achter het standbeeld.')
  
@@ -127,44 +127,47 @@ if kamer7_keuze == 8 or kamer2_keuze == 8 or kamer6_keuze == 8:
 # === [kamer 3] === #
 print("Welkom in kamer3 ")
 print('Je duwt hem open en stap een hele lange kamer binnen.')
-print(f'Je huidige saldo is {rupee} rupee')
-if rupee >= 3 or rupee >= 2:
-    wapens_keuze = input("Wil de wapens (los) kopen of (alles) of (niks)? ")
-    if wapens_keuze == "alles":
-        player_attack += 2
-        player_defense += 1
-        sleutel = True
-        rupee -= 3
-        wapens_keuze = 'schild en zwaard'
-        print(f"JE hebt alle wapens en sleutel gekocht en je huidige slado is {rupee} rupee ")    
-    elif wapens_keuze == "los":
-        wapens_keuze = input("Welke wapen wil je kiezen (zwaard/schild) of (sleutel) of (niks)? ")
-        if wapens_keuze == 'zwaard':
-            player_attack += 2
-            rupee -= 1
-        elif wapens_keuze == 'schild':
-            player_defense += 1
-            rupee -= 1
-        elif wapens_keuze == "sleutel":
-            sleutel = True
-        print(f"Je hebt een {wapens_keuze} gekocht! en je huidige saldo is {rupee} rupee")
+print('items zijn (schild) (zwaard) (sleutel)')
+if rupee >= 3:
+    print('je kan nu alle items kopen type (alles) als je alles wilt kopen')
+elif rupee == 2:
+    print('je kan nu 2 items kopen ')
 elif rupee == 1:
-        wapens_keuze = input("Welke wapen wil je kiezen (zwaard/schild) of sleutel? ")
-        if wapens_keuze == 'zwaard':
-            player_attack += 2
-            rupee -= 1
-        elif wapens_keuze == 'schild':
-            player_defense += 1
-            rupee -= 1
-        elif wapens_keuze == 'sleutel':
-            sleutel = True
-        print(f"Je hebt een {wapens_keuze} gekocht! en je huidige saldo is {rupee} rupee")
+    print('je kan alleen maar een item kopen')
+wapen_kopen = input('wat wil je kopen je? ')
+if wapen_kopen == 'alles':
+    player_defense += 1
+    player_attack += 2
+    sleutel = True
+elif wapen_kopen == 'schild en zwaard':
+    player_defense += 1
+    player_attack += 2
+elif wapen_kopen == 'zwaard en sleutel':
+    player_attack += 2
+    sleutel = True
+elif wapen_kopen == 'schild en sleutel':
+    player_defense += 1
+    sleutel = True
+elif wapen_kopen == 'zwaard':
+    player_attack += 2
+elif wapen_kopen == 'schild':
+    player_defense += 1
 else:
-    print("JE hebt niks gekocht!")
-print('Op naar de volgende deur.')
-print('')
+    print('je hebt niks gekocht')
+print(f'je hebt gekozen voor {wapen_kopen} success verder')
+kamer3_keuze = int(input("Naar wlke kamer wil je heen gaan (11/4)? "))
+if kamer3_keuze == 11:
+        # === [kamer 11] === #
+        print(" === [kamer 4] === ")
+        print("Deze kamer zit vol met pijlen die uit de muur schieten. Alleen als je een schild heeft kan je hier heelhuids doorheen komen. ")
+        if 'schild' in wapen_kopen:
+            print("Je kan door")
+        else:
+            print("Game over")
+            exit()
+print("")
 time.sleep(2)
- 
+
 # === [kamer 4] === #
 print("=== [kamer 4] ===")
 tweede_zombie_attack = 2
