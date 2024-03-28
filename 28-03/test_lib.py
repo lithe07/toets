@@ -5,7 +5,6 @@ from colorama import init
 from termcolor import colored
 
 MAX_REPORT_STRING = 100
-
 init()
 
 data = {'results':[], 'inputs': [], 'prompts': [], 'prints': [], 'active': True}
